@@ -1,0 +1,61 @@
+<article class="card" [attr.aria-labelledby]="titleId()">
+  <header class="card__header">
+    <div class="card__meta">
+      <span class="badge badge--category">{{ category() }}</span>
+      <span class="badge" [class]="'badge--' + status().tone">{{ status().label }}</span>
+    </div>
+    <h3 class="card__title" [id]="titleId()">{{ project().title }}</h3>
+    <p class="card__context">
+      {{ project().context }} · <time>{{ project().period | period }}</time>
+    </p>
+  </header>
+
+  <dl class="card__body">
+    <div>
+      <dt>Problema</dt>
+      <dd>{{ project().problem }}</dd>
+    </div>
+    <div>
+      <dt>Mi contribución</dt>
+      <dd>
+        <ul>
+          @for (item of project().contribution; track item) {
+            <li>{{ item }}</li>
+          }
+        </ul>
+      </dd>
+    </div>
+    <div>
+      <dt>Funcionalidades</dt>
+      <dd>
+        <ul>
+          @for (item of project().features; track item) {
+            <li>{{ item }}</li>
+          }
+        </ul>
+      </dd>
+    </div>
+  </dl>
+
+  <ul class="card__tech" aria-label="Tecnologías">
+    @for (tech of project().tech; track tech) {
+      <li>{{ tech }}</li>
+    }
+  </ul>
+
+  @if (project().note) {
+    <p class="card__note">{{ project().note }}</p>
+  }
+
+  @if (project().links.length) {
+    <ul class="card__links">
+      @for (link of project().links; track link.url) {
+        <li>
+          <a [href]="link.url" target="_blank" rel="noopener noreferrer">
+            {{ link.label }}<span class="visually-hidden"> de {{ project().title }} (abre en otra pestaña)</span>
+          </a>
+        </li>
+      }
+    </ul>
+  }
+</article>

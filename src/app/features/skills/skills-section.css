@@ -1,0 +1,46 @@
+.groups {
+  display: grid;
+  gap: var(--space-5);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+}
+
+.group {
+  padding: var(--space-5);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+.group h3 { margin: 0 0 var(--space-3); font-size: var(--text-lg); }
+.group ul { list-style: none; margin: 0; padding: 0; }
+
+.skill {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.1rem var(--space-3);
+  padding-block: var(--space-3);
+  border-block-start: 1px solid var(--border);
+}
+.skill:first-child { border-block-start: 0; padding-block-start: 0; }
+.skill__name { font-weight: 600; }
+.skill__evidence { grid-column: 1; font-size: var(--text-sm); color: var(--muted); }
+.skill__evidence::before {
+  content: '';
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  margin-inline-end: 0.4rem;
+  border-radius: 2px;
+  background: var(--border-strong);
+}
+.skill__evidence[data-kind='practicas']::before,
+.skill__evidence[data-kind='proyecto-propio']::before { background: var(--ok); }
+.skill__evidence[data-kind='academica']::before { background: var(--accent-strong); }
+.skill__evidence[data-kind='en-formacion']::before { background: var(--warn); }
+
+.skill__link {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-self: center;
+  font-size: var(--text-sm);
+  white-space: nowrap;
+}

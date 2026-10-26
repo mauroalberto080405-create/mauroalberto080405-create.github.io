@@ -1,0 +1,144 @@
+/* ---------- Tokens de diseño ---------- */
+:root {
+  --font-sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: ui-monospace, 'Cascadia Code', 'SF Mono', Menlo, Consolas, monospace;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.3rem;
+  --text-2xl: clamp(1.75rem, 4vw, 2.4rem);
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-8: 3rem;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --header-height: 3.75rem;
+
+  /* Paleta clara (contraste AA o superior sobre --bg y --surface) */
+  --bg: #f7f5f0;
+  --bg-alt: #efece4;
+  --surface: #ffffff;
+  --text: #1b1d22;
+  --muted: #545964;
+  --border: #e2ded5;
+  --border-strong: #b9b2a5;
+  --accent-strong: #3442c4;
+  --accent-soft: #e4e7fb;
+  --on-accent: #ffffff;
+  --ok: #1d7347;
+  --warn: #935600;
+  --focus: #3442c4;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #111318;
+    --bg-alt: #151820;
+    --surface: #1a1d25;
+    --text: #eceef2;
+    --muted: #a7adb9;
+    --border: #2b303b;
+    --border-strong: #4a5263;
+    --accent-strong: #a3adff;
+    --accent-soft: #23284a;
+    --on-accent: #111318;
+    --ok: #62d59c;
+    --warn: #f0b45a;
+    --focus: #a3adff;
+  }
+}
+
+/* ---------- Base ---------- */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 { line-height: 1.2; text-wrap: balance; }
+p { text-wrap: pretty; }
+
+a { color: var(--accent-strong); text-underline-offset: 0.2em; }
+a:hover { text-decoration-thickness: 2px; }
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+main:focus { outline: none; }
+
+/* Los anclajes quedan visibles bajo la cabecera fija. */
+[id] { scroll-margin-top: calc(var(--header-height) + var(--space-4)); }
+
+/* ---------- Utilidades compartidas ---------- */
+.container {
+  width: 100%;
+  max-width: 72rem;
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 4vw, 2rem);
+}
+
+.section { padding-block: clamp(3rem, 8vw, 5.5rem); }
+.section--alt { background: var(--bg-alt); }
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 2.75rem;
+  padding: 0.6rem 1.1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+  color: var(--text);
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.15s, border-color 0.15s;
+}
+.button:hover { border-color: var(--accent-strong); }
+.button--primary {
+  background: var(--accent-strong);
+  border-color: var(--accent-strong);
+  color: var(--on-accent);
+}
+.button--primary:hover { background: color-mix(in srgb, var(--accent-strong) 88%, var(--text)); }
+.button--ghost { background: transparent; }
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}

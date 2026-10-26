@@ -1,0 +1,35 @@
+<section class="hero" id="inicio" aria-labelledby="inicio-titulo">
+  <div class="container hero__inner">
+    <p class="hero__status">
+      <span class="hero__dot" aria-hidden="true"></span>
+      Disponible para prácticas y primer empleo
+    </p>
+
+    <h1 class="hero__title" id="inicio-titulo">
+      <span class="hero__name">{{ profile().displayName }}</span>
+      <span class="hero__role">{{ profile().role }}</span>
+    </h1>
+
+    <p class="hero__headline">{{ profile().headline }}</p>
+
+    <ul class="hero__highlights" aria-label="Datos destacados">
+      @for (item of profile().highlights; track item) {
+        <li>{{ item }}</li>
+      }
+    </ul>
+
+    <div class="hero__actions">
+      <a class="button button--primary" [href]="profile().cv.url" [attr.download]="profile().cv.fileName">
+        Descargar CV <span class="button__hint">(PDF)</span>
+      </a>
+      <a class="button" href="#proyectos">Ver proyectos</a>
+      @for (link of profile().links; track link.url) {
+        <a class="button button--ghost" [href]="link.url" target="_blank" rel="noopener noreferrer">
+          {{ link.label }}<span class="visually-hidden"> (abre en otra pestaña)</span>
+        </a>
+      }
+    </div>
+
+    <p class="hero__location">{{ profile().location }}</p>
+  </div>
+</section>
