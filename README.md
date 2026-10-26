@@ -3,7 +3,7 @@
 Portafolio profesional de **Mauro Alberto Contreras San Miguel**, estudiante de Ingeniería de Sistemas
 Computacionales (UPN) y desarrollador frontend junior.
 
-- **Sitio:** _pendiente de publicación_
+- **Sitio:** https://mauroalberto080405-create.github.io/
 - **Objetivo:** que un reclutador entienda en pocos minutos qué sé hacer y qué evidencia lo respalda, y que un
   evaluador técnico pueda revisar cómo organizo una aplicación Angular.
 
@@ -95,7 +95,7 @@ implicaría ajustar `HomePage`. No lo hice asíncrono antes de tiempo para no a�
 | Build de producción | `npm run build` | ✅ ~70 kB transferidos |
 | Escritorio, móvil (375 px), modo oscuro, foco con teclado | Revisión manual en el navegador | ✅ sin desbordamiento horizontal |
 | Consola | Sin errores en desarrollo | ✅ |
-| Sitio publicado | — | ⏳ pendiente |
+| Sitio publicado | Revisión del sitio en GitHub Pages: inicio, CV, enlaces externos, ruta inexistente → 404 de Angular | ✅ |
 
 ## Despliegue (GitHub Pages)
 
