@@ -1,0 +1,63 @@
+# Prueba, compila y publica el portafolio en GitHub Pages en cada push a main.
+# Requisito único: en el repositorio, Settings → Pages → Source: "GitHub Actions".
+name: Deploy a GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      - name: Pruebas unitarias
+        run: npx ng test --watch=false
+
+      # Un repo "usuario.github.io" se sirve en la raíz; cualquier otro, en /nombre-del-repo/.
+      - name: Calcular base href
+        id: base
+        run: |
+          repo="${{ github.event.repository.name }}"
+          if [[ "$repo" == *.github.io ]]; then echo "href=/" >> "$GITHUB_OUTPUT"; else echo "href=/$repo/" >> "$GITHUB_OUTPUT"; fi
+
+      - name: Build de producción
+        run: npx ng build --base-href "${{ steps.base.outputs.href }}"
+
+      # GitHub Pages no reescribe rutas: con 404.html = index.html, Angular muestra su propia página 404.
+      - name: Fallback para rutas
+        run: cp dist/mauro-portafolio/browser/index.html dist/mauro-portafolio/browser/404.html
+
+      - uses: actions/configure-pages@v6
+
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: dist/mauro-portafolio/browser
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5
