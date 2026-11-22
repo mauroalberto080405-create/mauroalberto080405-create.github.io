@@ -32,7 +32,7 @@ export const PORTFOLIO_CONTENT: PortfolioContent = {
       {
         kind: 'linkedin',
         label: 'LinkedIn',
-        url: 'https://www.linkedin.com/in/mauro-contreras-san-miguel-297164343',
+        url: 'https://www.linkedin.com/in/mauro-alberto-contreras-san-miguel-297164343',
       },
     ],
     cv: {
