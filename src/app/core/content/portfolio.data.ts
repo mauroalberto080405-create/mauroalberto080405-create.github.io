@@ -1,8 +1,8 @@
 import { PortfolioContent } from '../models/portfolio';
 
 /**
- * Contenido del portafolio. Fuentes: CV (IGNITE, oct 2026), constancia de prácticas,
- * documentación de BUSKA y certificados en PDF. La trazabilidad de cada dato está en un documento de trabajo local, fuera del repositorio.
+ * Contenido del portafolio. Fuentes: CV (nov 2026), constancia de prácticas, documentación
+ * de BUSKA, certificados en PDF y los README de los repositorios públicos de GitHub. La trazabilidad de cada dato está en un documento de trabajo local, fuera del repositorio.
  *
  * Para añadir un proyecto: agrega un objeto a `projects`. No hace falta tocar componentes.
  * Reglas: nada de DNI, teléfono ni dirección; ningún enlace que no exista.
@@ -17,7 +17,7 @@ export const PORTFOLIO_CONTENT: PortfolioContent = {
       'Convierto diseños de Figma en interfaces web claras y responsive con HTML semántico, CSS, TypeScript y Angular.',
     summary: [
       'Soy estudiante de últimos ciclos de Ingeniería de Sistemas Computacionales en la Universidad Privada del Norte (UPN). Durante un intercambio académico en la Universidade do Estado do Rio de Janeiro (UERJ) aprobé Ingeniería de Software con 10/10.',
-      'Tengo experiencia práctica en desarrollo frontend con HTML, CSS y JavaScript gracias a 320 horas de prácticas, y construí este portafolio con Angular y TypeScript para demostrar cómo organizo una aplicación.',
+      'Tengo experiencia práctica en desarrollo frontend con HTML, CSS y JavaScript gracias a 320 horas de prácticas. En mis proyectos personales construí un lector de facturas full stack con Angular y FastAPI, una tienda online con pagos en línea y este portafolio en Angular, siempre con pruebas automatizadas.',
     ],
     lookingFor:
       'Busco prácticas profesionales o un primer empleo como desarrollador junior, donde pueda aportar en el frontend y seguir aprendiendo Java, APIs REST y SQL dentro de un equipo.',
@@ -32,7 +32,7 @@ export const PORTFOLIO_CONTENT: PortfolioContent = {
       {
         kind: 'linkedin',
         label: 'LinkedIn',
-        url: 'https://www.linkedin.com/in/mauro-contreras-san-miguel',
+        url: 'https://www.linkedin.com/in/mauro-contreras-san-miguel-297164343',
       },
     ],
     cv: {
@@ -42,6 +42,59 @@ export const PORTFOLIO_CONTENT: PortfolioContent = {
   },
 
   projects: [
+    {
+      id: 'lector-facturas',
+      title: 'Lector de facturas con IA',
+      context: 'Proyecto personal · full stack',
+      category: 'personal',
+      status: 'prototipo',
+      period: { start: '2026-11' },
+      problem:
+        'Registrar facturas de proveedores a mano es lento y propenso a errores: un IGV mal calculado o un RUC mal escrito pasan desapercibidos.',
+      contribution: [
+        'Desarrollé la API en FastAPI: recibe facturas electrónicas peruanas en PDF, extrae sus datos con un modelo de IA y los guarda en PostgreSQL.',
+        'Separé la extracción (IA) de la validación (código): las reglas contables son funciones puras con pruebas, y una factura con errores queda OBSERVADA para revisión humana.',
+        'Construí el frontend en Angular con signals, formularios reactivos y un único servicio HTTP tipado.',
+        'Escribí pruebas con pytest y Jasmine que no dependen de la IA ni de la base de datos, y se ejecutan en GitHub Actions.',
+      ],
+      features: [
+        'Validaciones SUNAT: dígito verificador del RUC, IGV del 18 %, totales y suma de ítems',
+        'Detección de facturas duplicadas (RUC + serie-número)',
+        'Listado con filtros por RUC, estado y fechas, y resumen por mes y proveedor',
+        'Proveedor de IA intercambiable (Ollama local u OpenAI)',
+      ],
+      tech: ['Angular 20', 'TypeScript', 'Python', 'FastAPI', 'PostgreSQL', 'SQLAlchemy', 'Docker Compose', 'pytest'],
+      links: [
+        { kind: 'repo', label: 'Código en GitHub', url: 'https://github.com/mauroalberto080405-create/lector-facturas-ia' },
+      ],
+      note: 'Demostración local con facturas ficticias: se ejecuta con Docker y Ollama, sin demo pública. No hace OCR de facturas escaneadas.',
+    },
+    {
+      id: 'johari',
+      title: 'Johari Shop Beauty — tienda online',
+      context: 'Proyecto personal · e-commerce',
+      category: 'personal',
+      status: 'en-desarrollo',
+      period: { start: '2026-11' },
+      problem:
+        'Un emprendimiento peruano de maquillaje y skincare necesitaba vender en línea y administrar su catálogo y stock.',
+      contribution: [
+        'Desarrollé la tienda con HTML semántico, CSS propio (BEM, mobile-first) y JavaScript con módulos ES, sin frameworks.',
+        'Integré Firebase (Authentication y Firestore con reglas de seguridad) y pagos con Culqi mediante Cloud Functions que calculan el monto en el servidor.',
+        'Construí un panel para la dueña: productos, variantes, stock, imágenes y pedidos pagados.',
+      ],
+      features: [
+        'Catálogo con búsqueda en tiempo real que ignora tildes y mayúsculas, y filtros por categoría',
+        'Carrito que nunca supera el stock y avisa si cambia un precio',
+        'Pago con tarjeta o Yape (Culqi) o pedido por WhatsApp',
+        'Diálogos accesibles: foco atrapado, cierre con Escape y foco visible',
+      ],
+      tech: ['HTML5', 'CSS3', 'JavaScript (ES modules)', 'Firebase', 'Cloud Functions', 'Culqi', 'node:test'],
+      links: [
+        { kind: 'demo', label: 'Ver demo', url: 'https://johari-shop-beauty.netlify.app' },
+        { kind: 'repo', label: 'Código en GitHub', url: 'https://github.com/mauroalberto080405-create/johari-shop-beauty' },
+      ],
+    },
     {
       id: 'buska',
       title: 'BUSKA — módulo de comprador',
@@ -86,8 +139,38 @@ export const PORTFOLIO_CONTENT: PortfolioContent = {
         'Pruebas unitarias con Vitest, incluida una verificación de que no se publiquen datos sensibles',
       ],
       tech: ['Angular 22', 'TypeScript', 'CSS', 'Vitest'],
-      // El enlace al repositorio se agrega cuando esté publicado.
-      links: [],
+      links: [
+        {
+          kind: 'repo',
+          label: 'Código en GitHub',
+          url: 'https://github.com/mauroalberto080405-create/mauroalberto080405-create.github.io',
+        },
+      ],
+    },
+    {
+      id: 'evotech',
+      title: 'EvoTech — sistema de ventas e inventario',
+      context: 'Proyecto académico en equipo · UPN',
+      category: 'academico',
+      status: 'terminado',
+      period: { start: '2026-11', end: '2026-11' },
+      problem:
+        'Una tienda de equipos tecnológicos necesitaba automatizar la venta en mostrador y el control de inventario.',
+      contribution: [
+        'Organicé el repositorio: línea base, README, guía de trabajo con Git y plantilla de pull request.',
+        'Desarrollé el ingreso de mercadería por proveedor (con N.° de factura o guía) y la edición de proveedores con validación del RUC.',
+        'Revisé e integré los pull requests del equipo, trabajados en ramas por funcionalidad.',
+      ],
+      features: [
+        'Aplicación de escritorio con 12 pantallas',
+        'Arquitectura en capas (modelos, datos, negocio e interfaz) con inyección de dependencias',
+        'Base de datos SQLite de 8 tablas',
+        'Versiones etiquetadas por entrega (v1.0-T2, v2.0-T3)',
+      ],
+      tech: ['C#', '.NET 8', 'Windows Forms', 'SQLite', 'Git'],
+      links: [
+        { kind: 'repo', label: 'Código en GitHub', url: 'https://github.com/mauroalberto080405-create/EvoTech' },
+      ],
     },
     {
       id: 'ontologia-uerj',
@@ -112,7 +195,7 @@ export const PORTFOLIO_CONTENT: PortfolioContent = {
     {
       name: 'Frontend',
       skills: [
-        { name: 'Angular', evidence: 'proyecto-propio', projectId: 'portafolio' },
+        { name: 'Angular', evidence: 'proyecto-propio', projectId: 'portafolio', detail: 'También en el lector de facturas' },
         { name: 'TypeScript', evidence: 'proyecto-propio', projectId: 'portafolio' },
         { name: 'JavaScript (ES6+)', evidence: 'practicas', projectId: 'buska' },
         { name: 'HTML5 semántico', evidence: 'practicas', projectId: 'buska' },
@@ -123,17 +206,21 @@ export const PORTFOLIO_CONTENT: PortfolioContent = {
     {
       name: 'Backend y datos',
       skills: [
+        { name: 'APIs REST con FastAPI', evidence: 'proyecto-propio', projectId: 'lector-facturas' },
+        { name: 'Python', evidence: 'en-formacion', projectId: 'lector-facturas' },
         { name: 'SQL (MySQL, SQL Server)', evidence: 'academica', detail: 'Curso de Base de Datos' },
         { name: 'MongoDB', evidence: 'academica' },
+        { name: 'C# y .NET', evidence: 'academica', projectId: 'evotech' },
         { name: 'Java y Spring Boot', evidence: 'academica', detail: 'Programación Orientada a Objetos' },
-        { name: 'APIs REST', evidence: 'en-formacion' },
       ],
     },
     {
       name: 'Diseño y herramientas',
       skills: [
         { name: 'Figma', evidence: 'practicas', projectId: 'buska' },
-        { name: 'Git / GitHub', evidence: 'practicas', projectId: 'buska', detail: 'Ramas por funcionalidad' },
+        { name: 'Git / GitHub', evidence: 'practicas', projectId: 'buska', detail: 'Ramas por funcionalidad y pull requests' },
+        { name: 'Pruebas unitarias', evidence: 'proyecto-propio', projectId: 'lector-facturas', detail: 'pytest, Jasmine y Vitest' },
+        { name: 'GitHub Actions (CI/CD)', evidence: 'proyecto-propio', projectId: 'portafolio' },
         { name: 'Visual Studio Code', evidence: 'practicas' },
       ],
     },
@@ -141,7 +228,6 @@ export const PORTFOLIO_CONTENT: PortfolioContent = {
       name: 'Otros',
       skills: [
         { name: 'OWL y SPARQL', evidence: 'academica', projectId: 'ontologia-uerj' },
-        { name: 'Python', evidence: 'academica', detail: 'Nivel básico' },
         { name: 'Redes y Linux', evidence: 'academica', detail: 'Cursos Cisco NetAcad' },
       ],
     },
@@ -164,7 +250,7 @@ export const PORTFOLIO_CONTENT: PortfolioContent = {
       institution: 'Universidad Privada del Norte (UPN)',
       period: { start: '2022' },
       details: [
-        'Cursos: Programación Orientada a Objetos, Base de Datos, Diseño y Arquitectura de Software, Sistemas Operativos, Redes.',
+        'Cursos: Programación Orientada a Objetos, Base de Datos, Diseño y Arquitectura de Software, Sistemas Inteligentes y Machine Learning, Sistemas Operativos, Redes.',
       ],
     },
     {
@@ -185,6 +271,7 @@ export const PORTFOLIO_CONTENT: PortfolioContent = {
   ],
 
   certifications: [
+    { name: 'CCNA: Enterprise Networking, Security, and Automation', issuer: 'Cisco Networking Academy', date: '2026-11', relevance: 'principal' },
     { name: 'CCNA: Switching, Routing & Wireless Essentials', issuer: 'Cisco Networking Academy', date: '2025-11', relevance: 'principal' },
     { name: 'Linux Essentials', issuer: 'Cisco Networking Academy · NDG', date: '2025-07', relevance: 'principal' },
     { name: 'CCNA: Introduction to Networks', issuer: 'Cisco Networking Academy', date: '2025-06', relevance: 'principal' },
